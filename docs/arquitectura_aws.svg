@@ -1,0 +1,108 @@
+<svg viewBox="0 0 980 760" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+  <rect width="980" height="760" fill="#ffffff"/>
+
+  <!-- Fuentes -->
+  <text x="490" y="28" text-anchor="middle" font-size="15" font-weight="bold" fill="#1a1a1a">Fuentes de datos (sin cambios en el día a día de las tiendas)</text>
+  <g font-size="12" fill="#1a1a1a">
+    <rect x="30"  y="42" width="200" height="52" rx="6" fill="#eef3fb" stroke="#4472c4"/>
+    <text x="130" y="63" text-anchor="middle" font-weight="bold">POS (40 tiendas)</text>
+    <text x="130" y="80" text-anchor="middle">Export CSV diario</text>
+
+    <rect x="260" y="42" width="200" height="52" rx="6" fill="#eef3fb" stroke="#4472c4"/>
+    <text x="360" y="63" text-anchor="middle" font-weight="bold">ERP legacy</text>
+    <text x="360" y="80" text-anchor="middle">Export JSON diario</text>
+
+    <rect x="490" y="42" width="200" height="52" rx="6" fill="#eef3fb" stroke="#4472c4"/>
+    <text x="590" y="63" text-anchor="middle" font-weight="bold">Shopify</text>
+    <text x="590" y="80" text-anchor="middle">Webhook / API pull</text>
+
+    <rect x="720" y="42" width="200" height="52" rx="6" fill="#eef3fb" stroke="#4472c4"/>
+    <text x="820" y="63" text-anchor="middle" font-weight="bold">Tipo de cambio</text>
+    <text x="820" y="80" text-anchor="middle">API pública, 1x/día</text>
+  </g>
+
+  <!-- arrows down to S3 raw -->
+  <g stroke="#888" stroke-width="1.5" marker-end="url(#arrow)">
+    <line x1="130" y1="94" x2="270" y2="130"/>
+    <line x1="360" y1="94" x2="330" y2="130"/>
+    <line x1="590" y1="94" x2="500" y2="130"/>
+    <line x1="820" y1="94" x2="550" y2="130"/>
+  </g>
+
+  <!-- S3 raw -->
+  <rect x="240" y="132" width="500" height="46" rx="6" fill="#fdf2e3" stroke="#d9822b"/>
+  <text x="490" y="160" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a1a">Amazon S3 — Zona Raw (datos crudos tal como llegan, versionados)</text>
+
+  <line x1="490" y1="178" x2="490" y2="210" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Lambda ETL -->
+  <rect x="290" y="212" width="400" height="56" rx="6" fill="#eaf7ea" stroke="#4a8c4a"/>
+  <text x="490" y="235" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a1a">AWS Lambda (Python + DuckDB)</text>
+  <text x="490" y="253" text-anchor="middle" font-size="11" fill="#1a1a1a">mismo modelo SQL validado localmente — staging / conformado / marts</text>
+
+  <!-- EventBridge trigger -->
+  <rect x="740" y="212" width="200" height="56" rx="6" fill="#f5f0fb" stroke="#7d5ba6"/>
+  <text x="840" y="235" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a1a">Amazon EventBridge</text>
+  <text x="840" y="252" text-anchor="middle" font-size="11" fill="#1a1a1a">dispara el ETL 1x/día</text>
+  <line x1="740" y1="240" x2="694" y2="240" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Secrets manager -->
+  <rect x="40" y="212" width="210" height="56" rx="6" fill="#f5f0fb" stroke="#7d5ba6"/>
+  <text x="145" y="235" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a1a">AWS Secrets Manager</text>
+  <text x="145" y="252" text-anchor="middle" font-size="11" fill="#1a1a1a">credenciales API Shopify</text>
+  <line x1="250" y1="240" x2="286" y2="240" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <line x1="490" y1="268" x2="490" y2="300" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- S3 curated + Glue -->
+  <rect x="240" y="302" width="300" height="56" rx="6" fill="#fdf2e3" stroke="#d9822b"/>
+  <text x="390" y="325" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a1a">Amazon S3 — Zona Curada</text>
+  <text x="390" y="343" text-anchor="middle" font-size="11" fill="#1a1a1a">Parquet: dim_producto, fact_ventas, fact_inventario</text>
+
+  <rect x="560" y="302" width="180" height="56" rx="6" fill="#fdf2e3" stroke="#d9822b"/>
+  <text x="650" y="325" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a1a">AWS Glue Data Catalog</text>
+  <text x="650" y="343" text-anchor="middle" font-size="11" fill="#1a1a1a">metadatos / esquema</text>
+
+  <line x1="390" y1="358" x2="440" y2="392" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="650" y1="358" x2="560" y2="392" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- Athena -->
+  <rect x="340" y="394" width="300" height="52" rx="6" fill="#eef3fb" stroke="#4472c4"/>
+  <text x="490" y="416" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a1a">Amazon Athena</text>
+  <text x="490" y="433" text-anchor="middle" font-size="11" fill="#1a1a1a">SQL bajo demanda, pago por consulta</text>
+
+  <line x1="490" y1="446" x2="490" y2="478" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+  <!-- QuickSight -->
+  <rect x="290" y="480" width="400" height="60" rx="6" fill="#e9f5fb" stroke="#2f7fa3"/>
+  <text x="490" y="504" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">Amazon QuickSight — Dashboard único</text>
+  <text x="490" y="523" text-anchor="middle" font-size="11" fill="#1a1a1a">ventas y rotación de inventario de las 40 tiendas, un solo lugar</text>
+
+  <!-- SNS alert branch -->
+  <line x1="640" y1="420" x2="800" y2="480" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="740" y="482" width="200" height="56" rx="6" fill="#fbeaea" stroke="#b34a4a"/>
+  <text x="840" y="505" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a1a">Amazon SNS</text>
+  <text x="840" y="522" text-anchor="middle" font-size="11" fill="#1a1a1a">alerta por email: quiebre &gt;3 días</text>
+
+  <!-- Users -->
+  <line x1="380" y1="540" x2="380" y2="572" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <line x1="620" y1="540" x2="620" y2="572" stroke="#888" stroke-width="1.5" marker-end="url(#arrow)"/>
+  <rect x="260" y="574" width="240" height="52" rx="6" fill="#ffffff" stroke="#1a1a1a"/>
+  <text x="380" y="596" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a1a">Dueño de CaféNorte</text>
+  <text x="380" y="613" text-anchor="middle" font-size="11" fill="#1a1a1a">vista ejecutiva, sin SQL</text>
+
+  <rect x="500" y="574" width="240" height="52" rx="6" fill="#ffffff" stroke="#1a1a1a"/>
+  <text x="620" y="596" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a1a">Director de TI</text>
+  <text x="620" y="613" text-anchor="middle" font-size="11" fill="#1a1a1a">acceso a Athena / detalle técnico</text>
+
+  <!-- monitoring footer -->
+  <rect x="40" y="660" width="900" height="60" rx="6" fill="#f2f2f2" stroke="#999"/>
+  <text x="490" y="684" text-anchor="middle" font-size="12" font-weight="bold" fill="#1a1a1a">Amazon CloudWatch — logs y alarmas si el ETL diario falla (todos los servicios de arriba)</text>
+  <text x="490" y="702" text-anchor="middle" font-size="11" fill="#444">Presupuesto objetivo: USD $200/mes · estimado real: ver tabla de costos en la propuesta</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#888"/>
+    </marker>
+  </defs>
+</svg>
