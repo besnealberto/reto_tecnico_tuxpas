@@ -10,7 +10,9 @@ Hoy los números de ventas e inventario viven en 3 sistemas que no se hablan ent
 
 ## Arquitectura propuesta
 
-![Arquitectura AWS](docs/arquitectura_aws.svg)
+![Cómo se ven tus ventas e inventario en un solo lugar](docs/arquitectura_aws_simple.svg)
+
+*Diagrama técnico detallado (servicios AWS específicos, flujo de datos) en [`docs/arquitectura_aws.svg`](docs/arquitectura_aws.svg) — para la conversación con el Director de TI.*
 
 **Por qué esta arquitectura y no otra:**
 

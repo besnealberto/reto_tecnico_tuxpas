@@ -1,0 +1,53 @@
+<svg viewBox="0 0 980 420" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+  <rect width="980" height="420" fill="#ffffff"/>
+
+  <text x="490" y="34" text-anchor="middle" font-size="17" font-weight="bold" fill="#1a1a1a">Cómo se ven tus ventas e inventario en un solo lugar</text>
+
+  <!-- Step 1: fuentes -->
+  <rect x="20" y="120" width="190" height="130" rx="10" fill="#eef3fb" stroke="#4472c4" stroke-width="1.5"/>
+  <text x="115" y="150" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">1. Tus datos</text>
+  <text x="115" y="178" text-anchor="middle" font-size="12" fill="#1a1a1a">Ventas en tienda</text>
+  <text x="115" y="198" text-anchor="middle" font-size="12" fill="#1a1a1a">Inventario (ERP)</text>
+  <text x="115" y="218" text-anchor="middle" font-size="12" fill="#1a1a1a">Tienda en línea</text>
+
+  <line x1="210" y1="185" x2="258" y2="185" stroke="#888" stroke-width="2" marker-end="url(#arrow2)"/>
+
+  <!-- Step 2: AWS platform -->
+  <rect x="260" y="110" width="230" height="150" rx="10" fill="#fdf2e3" stroke="#d9822b" stroke-width="1.5"/>
+  <text x="375" y="142" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">2. Se ordenan solas</text>
+  <text x="375" y="168" text-anchor="middle" font-size="12" fill="#1a1a1a">cada noche, en la nube</text>
+  <text x="375" y="188" text-anchor="middle" font-size="12" fill="#1a1a1a">de Amazon (AWS)</text>
+  <text x="375" y="212" text-anchor="middle" font-size="11" fill="#555">sin que nadie de tienda</text>
+  <text x="375" y="228" text-anchor="middle" font-size="11" fill="#555">tenga que hacer nada extra</text>
+
+  <line x1="490" y1="185" x2="538" y2="185" stroke="#888" stroke-width="2" marker-end="url(#arrow2)"/>
+
+  <!-- Step 3: consolidation -->
+  <rect x="540" y="110" width="200" height="150" rx="10" fill="#eaf7ea" stroke="#4a8c4a" stroke-width="1.5"/>
+  <text x="640" y="142" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">3. Se calculan</text>
+  <text x="640" y="168" text-anchor="middle" font-size="12" fill="#1a1a1a">las mismas cifras de</text>
+  <text x="640" y="186" text-anchor="middle" font-size="12" fill="#1a1a1a">ventas y rotación</text>
+  <text x="640" y="204" text-anchor="middle" font-size="12" fill="#1a1a1a">para las 40 tiendas</text>
+
+  <line x1="740" y1="185" x2="788" y2="185" stroke="#888" stroke-width="2" marker-end="url(#arrow2)"/>
+
+  <!-- Step 4: dashboard -->
+  <rect x="790" y="100" width="170" height="170" rx="10" fill="#e9f5fb" stroke="#2f7fa3" stroke-width="1.5"/>
+  <text x="875" y="130" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">4. Un tablero</text>
+  <text x="875" y="150" text-anchor="middle" font-size="14" font-weight="bold" fill="#1a1a1a">único</text>
+  <text x="875" y="176" text-anchor="middle" font-size="11" fill="#1a1a1a">Dueño: ve el negocio</text>
+  <text x="875" y="192" text-anchor="middle" font-size="11" fill="#1a1a1a">Director TI: ve el detalle</text>
+  <text x="875" y="216" text-anchor="middle" font-size="11" fill="#b34a4a" font-weight="bold">+ aviso automático</text>
+  <text x="875" y="232" text-anchor="middle" font-size="11" fill="#b34a4a" font-weight="bold">si falta stock</text>
+
+  <!-- footer -->
+  <rect x="20" y="310" width="940" height="70" rx="8" fill="#f2f2f2" stroke="#999"/>
+  <text x="490" y="338" text-anchor="middle" font-size="13" font-weight="bold" fill="#1a1a1a">≈ USD $38/mes de los $200 presupuestados — sin servidores que mantener ni licencias adicionales</text>
+  <text x="490" y="360" text-anchor="middle" font-size="11" fill="#555">Diagrama técnico detallado (servicios AWS, flechas de datos) disponible como anexo para la conversación con el Director de TI</text>
+
+  <defs>
+    <marker id="arrow2" markerWidth="10" markerHeight="10" refX="7" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#888"/>
+    </marker>
+  </defs>
+</svg>
