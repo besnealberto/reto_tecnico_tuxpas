@@ -4,7 +4,7 @@
 **De:** Tuxpas (AWS Advanced Partner)
 **Sobre:** Arquitectura de producción para consolidar ventas e inventario de las 40 tiendas + Shopify en un solo lugar
 
-## El problema, en una frase
+## El problema en una frase
 
 Hoy los números de ventas e inventario viven en 3 sistemas que no se hablan entre sí; cada área reporta una cifra distinta porque nadie está reconciliando POS, ERP y Shopify de la misma forma. Ya construimos y validamos esa lógica de reconciliación (ver repositorio) — esta propuesta es cómo llevarla a producción en AWS, dentro de tu presupuesto de USD $200/mes.
 
@@ -12,7 +12,7 @@ Hoy los números de ventas e inventario viven en 3 sistemas que no se hablan ent
 
 ![Cómo se ven tus ventas e inventario en un solo lugar](docs/arquitectura_aws_simple.svg)
 
-*Diagrama técnico detallado (servicios AWS específicos, flujo de datos) en [`docs/arquitectura_aws.svg`](docs/arquitectura_aws.svg) — para la conversación con el Director de TI.*
+*Diagrama técnico detallado (servicios AWS específicos, flujo de datos) en [`docs/arquitectura_aws.svg`](docs/arquitectura_aws.svg)
 
 **Por qué esta arquitectura y no otra:**
 
@@ -56,7 +56,6 @@ Cálculo propio (no se generó vía AWS Pricing Calculator por restricciones de 
 ## Supuestos y preguntas abiertas antes de firmar
 
 1. ¿Los 5 SKUs huérfanos de POS corresponden a los 10 SKUs huérfanos del ERP con numeración casi idéntica (ver README, sección de supuestos, punto 3)? Esto lo debe confirmar alguien con acceso al ERP — no se puede inferir solo de los datos.
-2. ¿Quién en CaféNorte será el responsable ("data owner") de mantener actualizado el mapeo SKU cuando entren productos nuevos?
-3. ¿El refresco diario es suficiente, o hay una necesidad real de ver quiebres de stock en tiempo casi real (cambiaría la arquitectura de Fase 1)?
-4. ¿CaféNorte ya tiene una app/integración con permisos sobre la API de Shopify, o Tuxpas necesita gestionar esa conexión desde cero?
-5. ¿El presupuesto de $200/mes es exclusivamente para esta infraestructura de datos, o debe compartirse con otras cargas ya existentes en la cuenta de AWS?
+2. ¿La actualización diaria es suficiente, o hay una necesidad real de ver quiebres de stock en tiempo real?
+3. ¿CaféNorte ya tiene una app/integración con permisos sobre la API de Shopify, o Tuxpas necesita gestionar esa conexión desde cero?
+4. ¿El presupuesto de $200/mes es exclusivamente para esta infraestructura de datos, o debe compartirse con otras cargas ya existentes en la cuenta de AWS?
