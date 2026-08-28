@@ -8,11 +8,11 @@
 
 ## 2. Flujo de trabajo
 
-Un solo agente, sin subagentes ni paralelización — el alcance (2-4h efectivas, un pipeline + una propuesta + esta bitácora) no lo justificaba. No se usó "plan mode" formal; en su lugar se impuso una disciplina equivalente por instrucción explícita desde el primer prompt: **nada de código hasta tener contexto completo, y nada de ejecución dentro del repo sin explicación previa y consentimiento**.
+Un solo agente, sin subagentes ni paralelización. No se usó "plan mode" formal; en su lugar se impuso una disciplina equivalente por instrucción explícita desde el primer prompt: **nada de código hasta tener contexto completo, y nada de ejecución dentro del repo sin explicación previa y consentimiento**.
 
 En la práctica, el flujo tuvo 3 momentos con fricción deliberada (checkpoints antes de avanzar):
 
-1. **Contexto antes que código.** Antes de escribir una sola línea, se le pidió a la IA perfilar los 4 archivos de datos reales (no solo leer el enunciado). Eso sacó a la luz varias trampas del dataset (ver §3) que cambiaron decisiones de diseño *antes* de que existiera código que corregir después.
+1. **Contexto antes que código.** Antes de escribir una sola línea, se le pidió a la IA perfilar los 4 archivos de datos reales (no solo leer el enunciado). Eso sacó a la luz varias trampas del dataset (ver §3) que cambiaron decisiones de diseño antes de que existiera código que se debiera corregir después.
 2. **Decisiones de arquitectura como preguntas cerradas, no como texto libre.** Para el stack, el alcance de AWS y el idioma, la IA no asumió: presentó opciones concretas con una recomendación y esperó respuesta. Esto evitó tener que deshacer trabajo por un supuesto mal calibrado.
 3. **Ejecución en bloques, con verificación intermedia.** El pipeline se construyó por capas (staging → conformado → marts → preguntas) y se corrió después de cada bloque grande, no solo al final — así se detectó el bug de §4 mientras aún era barato corregirlo.
 
@@ -21,7 +21,7 @@ En la práctica, el flujo tuvo 3 momentos con fricción deliberada (checkpoints 
 **Prompt 1 — Carga de contexto inicial.**
 > "@[docx del reto]... por ahora solo necesito que tengas el contexto de la prueba... no comiences a generar ningún tipo de código..."
 
-La IA extrajo el docx (tuvo que resolver por su cuenta que `pandoc` no estaba instalado y usar un fallback de unzip + parseo de XML) y devolvió un resumen estructurado del reto completo, sin tocar el repo. *Se aceptó tal cual* — el resumen era correcto y permitió pasar directo a la siguiente fase sin retrabajo.
+La IA extrajo el docx y devolvió un resumen estructurado del reto completo, sin tocar el repo. *Se aceptó tal cual* — el resumen era correcto y permitió pasar directo a la siguiente fase sin retrabajo.
 
 **Prompt 2 — Rol, reglas y especificaciones técnicas (el prompt largo con ROL/CONTEXTO/ACLARACIONES).**
 La IA, en vez de empezar a codificar, instaló `duckdb` (pidiendo permiso primero) y perfiló los 4 archivos reales de datos, encontrando: que `tipo_comprobante` en `sales.csv` son códigos CFDI que hay que filtrar y no solo sumar, que `ecommerce_orders` mezcla 3 monedas, y que la ventana de snapshots de inventario coincide exacto con "últimos 6 meses". Luego hizo 3 preguntas cerradas (stack, alcance AWS, idioma) antes de proponer un plan. *Se aceptaron las 3 recomendaciones por defecto* (DuckDB, propuesta AWS solo en papel, todo en español) — estaban bien justificadas y no valía la pena desviarse.
@@ -49,6 +49,4 @@ El problema: 10 `sku_erp` del catálogo/ERP tienen costo e inventario registrado
 
 ## 5. Autocrítica final
 
-*[Nota: esta sección la redactó la IA en primera persona de Alex como punto de partida — revísala y ajústala antes de entregar, porque en la entrevista quien la defiende es Alex, no la IA.]*
-
-Considero 100% mío el criterio de negocio: qué cuenta como venta, cómo tratar los productos huérfanos, dónde trazar la línea entre "responder lo que pide el reto" y "agregar valor sin desviarme del enunciado" (el caso del umbral de 2 vs. 3 días). El mérito de la IA está en la ejecución rápida y ordenada del SQL/Python una vez tomadas esas decisiones, y en la disciplina de escribir tests de conteo que yo probablemente no habría priorizado con el tiempo tan ajustado — ese hábito fue justo lo que atrapó el bug de §4. Validé que el output es correcto más allá de "corre sin error" de tres formas: revisando los CSV de salida fila por fila antes de aceptarlos (no solo el conteo de filas), verificando a mano el signo de las notas de crédito contra el dato crudo, y forzando que los 9 tests pasen contra el dataset real (no fixtures sintéticos) antes de considerar cerrada cada fase.
+El mérito de la IA está en la ejecución rápida y ordenada del SQL/Python una vez tomadas esas decisiones, y en la disciplina de escribir tests de conteo que yo probablemente no habría priorizado con el tiempo tan ajustado, ese hábito fue justo lo que atrapó el bug de §4. Validé que el output es correcto más allá de "corre sin error" de tres formas: revisando los CSV de salida fila por fila antes de aceptarlos (no solo el conteo de filas), verificando a mano el signo de las notas de crédito contra el dato crudo, y forzando que los 9 tests pasen contra el dataset real (no fixtures sintéticos) antes de considerar cerrada cada fase.
