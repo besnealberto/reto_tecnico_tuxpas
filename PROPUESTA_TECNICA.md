@@ -55,7 +55,7 @@ Cálculo propio (no se generó vía AWS Pricing Calculator por restricciones de 
 
 ## Supuestos y preguntas abiertas antes de firmar
 
-1. ¿Los 5 SKUs huérfanos de POS corresponden a los 10 SKUs huérfanos del ERP con numeración casi idéntica (ver README, sección de supuestos, punto 3)? Esto lo debe confirmar alguien con acceso al ERP — no se puede inferir solo de los datos.
+1. ¿Los SKUs huérfanos de POS/Shopify corresponden a los 10 SKUs huérfanos del ERP con numeración casi idéntica? Es especialmente probable en 4 casos donde ya existe un registro de mapeo POS↔Shopify al que solo le falta el campo de ERP (ver README, sección de supuestos, punto 3). Esto lo debe confirmar alguien con acceso al ERP — no se puede inferir solo de los datos.
 2. ¿La actualización diaria es suficiente, o hay una necesidad real de ver quiebres de stock en tiempo real?
 3. ¿CaféNorte ya tiene una app/integración con permisos sobre la API de Shopify, o Tuxpas necesita gestionar esa conexión desde cero?
 4. ¿El presupuesto de $200/mes es exclusivamente para esta infraestructura de datos, o debe compartirse con otras cargas ya existentes en la cuenta de AWS?
